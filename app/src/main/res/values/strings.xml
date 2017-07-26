@@ -4,6 +4,7 @@
     <string name="bt1">True</string>
     <string name="bt2">False</string>
     <string name="bt3">Next</string>
+    <string name="bt4">NextActivity</string>
     <string name="correct_message">Correct!</string>
     <string name="error_message">Error!</string>
     <string name="question_australia">Canberra is the capital of Australia.</string>

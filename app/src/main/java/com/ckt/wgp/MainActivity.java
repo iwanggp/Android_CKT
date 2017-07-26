@@ -2,12 +2,14 @@ package com.ckt.wgp;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+    private static final String TAG = "MainActivity";
     private TextView mQuestionTextView;
     private Button mTrueButton;
     private Button mFalseButton;
@@ -34,6 +36,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mTrueButton.setOnClickListener(this);
         mFalseButton = (Button) findViewById(R.id.bt2);
         mFalseButton.setOnClickListener(this);
+        Log.d(TAG, "onCreate() is run ....");
 
     }
 
@@ -70,5 +73,42 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         } else
             messageId = R.string.error_message;
         Toast.makeText(this, messageId, Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();//调用onStart()方法
+        Log.d(TAG, "onStart() is run ....");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();//调用onResume()方法
+        Log.d(TAG, "onResume() is run ......");
+
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();//调用onPause()方法
+        Log.d(TAG, "onPause() is run ......");
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();//调用onStop()方法
+        Log.d(TAG, "onStop() is run .....");
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();//调用onRestart()方法
+        Log.d(TAG, "onRestart() is run ....");
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.d(TAG, "onDestroy() is run...");
     }
 }
