@@ -33,13 +33,14 @@ public class CrimeListFragment extends Fragment {
 		updateUI();
 		return view;
 	}
-//郝晓倩真棒！
+
 	private void updateUI() {
 		CrimeLab crimeLab = CrimeLab.get(getActivity());
 		List<Crime> crimes = crimeLab.getCrimes();
 		Log.d(TAG, crimes.size() + "-----");
 		mCrimeAdapter = new CrimeAdapter(crimes);
 		mCrimeRecyclerView.setAdapter(mCrimeAdapter);
+//		mCrimeRecyclerView.addItemDecoration( new DividerGridItemDecoration(this ));
 	}
 
 
@@ -47,13 +48,12 @@ public class CrimeListFragment extends Fragment {
 	private class CrimeHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 		private TextView mTitleTextView;
 		private TextView mDataTextView;
-		private View line;
 		private Crime mCrime;
 
-		public CrimeHolder(LayoutInflater inflater, ViewGroup parent) {
-			super(inflater.inflate(R.layout.list_item_crime, parent, false));
-			mTitleTextView = (TextView) itemView.findViewById(R.id.crime_title);
-			mDataTextView = (TextView) itemView.findViewById(R.id.crime_date);
+		public CrimeHolder(View view) {
+			super(view);
+			mTitleTextView = (TextView) view.findViewById(R.id.crime_title);
+			mDataTextView = (TextView) view.findViewById(R.id.crime_date);
 			itemView.setOnClickListener(this);
 		}
 
@@ -69,6 +69,12 @@ public class CrimeListFragment extends Fragment {
 		}
 	}
 
+	/**
+	 * 继承了RecyclerView.Adapter必须实现三个方法
+	 * getItemCount返回数据的总数
+	 * onCreateViewHolder 就是创建ViewHolder这个方法实际上调用的不多，当ViewHolder够用，就不在增加了
+	 * onBindViewHolder 顾名思义就是数据绑定的作用
+	 */
 	private class CrimeAdapter extends RecyclerView.Adapter<CrimeHolder> {
 		private List<Crime> mCrimes;
 
@@ -79,7 +85,10 @@ public class CrimeListFragment extends Fragment {
 		@Override
 		public CrimeHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 			LayoutInflater layoutInflater = LayoutInflater.from(getActivity());
-			return new CrimeHolder(layoutInflater, parent);
+			View view = layoutInflater.inflate(R.layout.list_item_crime, parent, false);
+			CrimeHolder holder = new CrimeHolder(view);
+			return holder;
+//			return new CrimeHolder(layoutInflater, parent);
 		}
 
 		@Override
